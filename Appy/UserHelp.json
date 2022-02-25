@@ -1,0 +1,69 @@
+{
+  "Categories": [
+    {
+      "Name": "Applications that aren't working",
+      "Description": "Application actions for standard users",
+      "UserActions": [
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a commandss",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        }
+      ]
+    },
+    {
+      "Name": "System",
+      "Description": "System actions3",
+      "UserActions": [
+        {
+          "Title": "Windows Update",
+          "CommandArguments": "gwmi win32_quickfixengineering | Sort-Object InstalledOn | ogv -passthru -Title 'Select an update to be removed'",
+          "Description": "Get the most recent updates"
+        }
+      ]
+    },
+    {
+      "Name": "Something New",
+      "Description": "System actions1",
+      "UserActions": [
+        {
+          "Title": "Windows Update",
+          "CommandArguments": "gwmi win32_quickfixengineering | Sort-Object InstalledOn | ogv -passthru -Title 'Select an update to be removed'",
+          "Description": "Get the most recent updates"
+        }
+      ]
+    },
+    {
+      "Name": "Not System",
+      "Description": "System actions2",
+      "UserActions": [
+        {
+          "Title": "Windows Updatesss",
+          "CommandArguments": "gwmi win32_quickfixengineering | Sort-Object InstalledOn | ogv -passthru -Title 'Select an update to be removed'",
+          "Description": "Get the most recent updates"
+        }
+      ]
+    },
+    {
+      "Name": "Not System",
+      "Description": "System actions2",
+      "UserActions": [
+        {
+          "Title": "Windows Update",
+          "CommandArguments": "gwmi win32_quickfixengineering | Sort-Object InstalledOn | ogv -passthru -Title 'Select an update to be removed'",
+          "Description": "Get the most recent updates"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="Appy.Views.ActionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Appy.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Name="ActionGrid" MouseUp="StackPanel_MouseUp" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave" Background="{Binding ActionBackground}" >
+        <Rectangle x:Name="IndicatorBlock" Fill="Blue" Width="10" MinHeight="20" HorizontalAlignment="Left" Opacity="{Binding SelectedOpacity}"/>
+        <TextBlock Text="{Binding Text}" FontSize="15" Padding="25,15" HorizontalAlignment="Left" TextWrapping="NoWrap"/>
+    </Grid>
+</UserControl>
