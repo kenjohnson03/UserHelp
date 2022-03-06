@@ -1,7 +1,9 @@
 ﻿using Appy.Classes;
+using Appy.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +33,9 @@ namespace Appy.Views
         private double CommandOutputHeight;
         private StringBuilder CommandOutputText;
 
+
+        private ActionPageViewModel dataContext;
+
         public ActionsPage(ObservableCollection<UserAction> Actions, ref Frame MyNavigator)
         {
             this._MyNavigator = MyNavigator;
@@ -41,6 +46,13 @@ namespace Appy.Views
             runCommand = "";
             CommandOutputHeight = 250.0;
             CommandOutputText = new StringBuilder();
+
+
+            dataContext = new ActionPageViewModel();
+            dataContext.EnableRun();
+
+            this.DataContext = dataContext;
+
 
             foreach (UserAction item in UserActions)
             {
@@ -84,10 +96,6 @@ namespace Appy.Views
 #if DEBUG
             Console.WriteLine("Stacky clicked");
 #endif
-            for (int i = 1; i < stackyTheStackPanel.Children.Count; i++)
-            {
-                //(stackyTheStackPanel.Children[i] as ActionControl).Selected = false;
-            }
         }
 
         public void UpdateActionControls(ActionControl ac)
@@ -116,21 +124,22 @@ namespace Appy.Views
         {
             Classes.PowerShellCmd cmd = new PowerShellCmd();
 
+            dataContext.DisableRun();
+            
+            cmd.UpdateCommandComplete += ProcessCommandOutput;
             cmd.Run(runCommand);
-            if (cmd.Output != null)
-            {
-                Brush b = new SolidColorBrush(Color.FromRgb(Convert.ToByte(255), Convert.ToByte(255), Convert.ToByte(255)));
-                TextBlock t = new TextBlock()
-                {
-                    Text = cmd.Output,
-                    Foreground = new SolidColorBrush(Color.FromRgb(Convert.ToByte(255), Convert.ToByte(255), Convert.ToByte(255))),
-                    Margin = new Thickness(25, 2, 0, 2),
-                    FontFamily = new FontFamily("Consolas")
-                };
+            
+            this.Run.IsEnabled = true;
+            
+        }
 
-                CommandOutput.Children.Add(t);
-                CommandOutputText.AppendLine(cmd.Output);
-            }
+        private async void Run_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            Classes.PowerShellCmd cmd = new PowerShellCmd();
+
+            dataContext.DisableRun();
+
+            ProcessCommandOutput(await Task.Run(() => cmd.Run(runCommand)));
         }
 
         private void Copy_Click(object sender, RoutedEventArgs e)
@@ -150,6 +159,24 @@ namespace Appy.Views
                 CommandOutputHeight = ConsoleOutputRowDefinition.Height.Value;
                 ConsoleOutputRowDefinition.Height = (GridLength)converter.ConvertFromString("0");
             }           
+        }
+
+        public void ProcessCommandOutput(string output)
+        {
+            if (output != null)
+            {
+                foreach(string line in output.Split(
+                    new string[] { Environment.NewLine },
+                    StringSplitOptions.None))
+                {
+                    if(!String.IsNullOrEmpty(line))
+                    {
+                        CommandOutputText.AppendLine(line);
+                        dataContext.AddLine(line);
+                    }                    
+                }                
+            }
+            dataContext.EnableRun();
         }
     }
 }

@@ -60,6 +60,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\PowerShellCmd.cs" />
     <Compile Include="Classes\UserAction.cs" />
+    <Compile Include="Data\ActionPageViewModel.cs" />
     <Compile Include="Data\ParseCategoriesJSON.cs" />
     <Compile Include="UIElements\GroupBorder.cs" />
     <Compile Include="UIElements\UserHelpButton.xaml.cs">

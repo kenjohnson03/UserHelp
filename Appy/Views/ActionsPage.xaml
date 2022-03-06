@@ -30,7 +30,7 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Name="ShowOutput" Content="Show Output" Click="ShowOutput_Click" Height="30" HorizontalAlignment="Right" Margin="10,0,10,0" Padding="10,0"></Button>
                             <Button Name="Copy" Content="Copy Output" Click="Copy_Click" Height="30" HorizontalAlignment="Right" Margin="10,0,10,0" Padding="10,0"></Button>
-                            <Button Name="Run" Content="Run" Click="Run_Click" Height="30" HorizontalAlignment="Right" Margin="10,0,25,0" Padding="10,0"></Button>
+                            <Button Name="Run" Content="Run" Click="Run_ClickAsync" IsEnabled="{Binding RunEnabled}" Height="30" HorizontalAlignment="Right" Margin="10,0,25,0" Padding="10,0"></Button>
                         </StackPanel>
                     </StackPanel>
                 
@@ -39,9 +39,16 @@
                 </StackPanel>-->                
                 <GridSplitter Height="5" Grid.Row="1" HorizontalAlignment="Stretch" ResizeDirection="Rows" Name="CommandGridSplitter" />
                 <ScrollViewer Grid.Row="2"  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-                    <StackPanel Background="MidnightBlue" Name="CommandOutput" >
-
-                    </StackPanel>
+                    <!--<StackPanel Background="MidnightBlue" Name="CommandOutput" >
+                        
+                    </StackPanel>-->
+                    <ListView ItemsSource="{Binding CommandOutputLines}" Background="MidnightBlue" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" Foreground="White" FontFamily="Consolas" Margin="0" />
+                            </DataTemplate>                            
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </ScrollViewer>
                 
 

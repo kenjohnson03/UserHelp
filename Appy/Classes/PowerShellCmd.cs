@@ -11,6 +11,9 @@ namespace Appy.Classes
     {
         private StringBuilder outputString;
         private int numOutputLines;
+        public delegate void CommandComplete(string output);
+        public CommandComplete UpdateCommandComplete;
+
         public string Output
         {
             get
@@ -98,6 +101,11 @@ namespace Appy.Classes
                 Console.WriteLine("EXE: " + ex.Message);
 #endif
                 outputString.AppendLine(ex.Message);
+            }
+            if(UpdateCommandComplete != null)
+            {
+                UpdateCommandComplete(outputString.ToString());
+
             }
             return outputString.ToString();
         }
