@@ -64,7 +64,6 @@ namespace Appy.Views
         private void IconBlock_MouseUp2(object sender, MouseButtonEventArgs e)
         {
             UserHelpButton b = sender as UserHelpButton;
-            Console.WriteLine("Click Up called {0} - {1}", sender.GetType(), b.Name);
             Appy.Classes.Category g = Categories.Where(x => x.Id == b.Id).FirstOrDefault<Appy.Classes.Category>();
             _MyNavigator.Navigate(new ActionsPage(g.UserActions, ref _MyNavigator));
         }
