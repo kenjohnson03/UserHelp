@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Appy.UIElements;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,7 +47,38 @@ namespace Appy.Views
             InitializeComponent();
             Categories = categories;
             _MyNavigator = MyNavigator;
-            SetupMainLayout();
+            //SetupMainLayout();
+            SetupMainLayout2();
+
+        }
+
+        private void SetupMainLayout2()
+        {
+            WrapPanel p = new WrapPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            CategoryGrid.Children.Add(p);
+            foreach (var group in Categories)
+            {
+                UserHelpButton b = new UserHelpButton(group.Id)
+                {
+                    Text = group.Name,
+                    Description = group.Description
+                };
+                b.MouseUp += new MouseButtonEventHandler(this.IconBlock_MouseUp2);
+                p.Children.Add(b);
+            }
+        }
+
+        private void IconBlock_MouseUp2(object sender, MouseButtonEventArgs e)
+        {
+            UserHelpButton b = sender as UserHelpButton;
+            Console.WriteLine("Click Up called {0} - {1}", sender.GetType(), b.Name);
+            Appy.Classes.Category g = Categories.Where(x => x.Id == b.Id).FirstOrDefault<Appy.Classes.Category>();
+            _MyNavigator.Navigate(new ActionsPage(g.UserActions, ref _MyNavigator));
         }
 
         private void SetupMainLayout()
