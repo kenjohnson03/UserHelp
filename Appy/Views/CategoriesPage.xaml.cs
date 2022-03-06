@@ -36,7 +36,6 @@ namespace Appy.Views
             InitializeComponent();
             Categories = categories;
             _MyNavigator = MyNavigator;
-            //SetupMainLayout();
             SetupMainLayout2();
 
         }
