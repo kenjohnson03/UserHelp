@@ -1,13 +1,13 @@
 {
   "Categories": [
     {
-      "Name": "Applications that aren't working",
-      "Description": "Application actions for standard users",
+      "Name": "Applications",
+      "Description": "Application repair actions",
       "UserActions": [
         {
           "Title": "Run a file",
           "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
-          "Description": "Simple command that outputs all of the processes that start with P"
+          "Description": "Run a script from the root folder"
         },
         {
           "Title": "Run a command",
@@ -15,53 +15,31 @@
           "Description": "Simple command that outputs all of the processes that start with P"
         },
         {
-          "Title": "Invoke a commandss",
+          "Title": "Invoke a command",
           "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
-          "Description": "Simple command that outputs all of the processes that start with P"
+          "Description": "Shows all running processes"
         }
       ]
     },
     {
-      "Name": "System",
-      "Description": "System actions3",
+      "Name": "Drivers",
+      "Description": "Driver actions",
       "UserActions": [
         {
-          "Title": "Windows Update",
-          "CommandArguments": "gwmi win32_quickfixengineering | Sort-Object InstalledOn | ogv -passthru -Title 'Select an update to be removed'",
-          "Description": "Get the most recent updates"
+          "Title": "Check for bad drivers",
+          "CommandArguments": "-File c:\\ProgramData\\UserHelp\\Drivers.ps1",
+          "Description": "Use Win32_SystemDrivers to look for problems. File is not included."
         }
       ]
     },
     {
-      "Name": "Something New",
-      "Description": "System actions1",
+      "Name": "System Information",
+      "Description": "Show system information",
       "UserActions": [
         {
-          "Title": "Windows Update",
-          "CommandArguments": "gwmi win32_quickfixengineering | Sort-Object InstalledOn | ogv -passthru -Title 'Select an update to be removed'",
-          "Description": "Get the most recent updates"
-        }
-      ]
-    },
-    {
-      "Name": "Not System",
-      "Description": "System actions2",
-      "UserActions": [
-        {
-          "Title": "Windows Updatesss",
-          "CommandArguments": "gwmi win32_quickfixengineering | Sort-Object InstalledOn | ogv -passthru -Title 'Select an update to be removed'",
-          "Description": "Get the most recent updates"
-        }
-      ]
-    },
-    {
-      "Name": "Not System",
-      "Description": "System actions2",
-      "UserActions": [
-        {
-          "Title": "Windows Update",
-          "CommandArguments": "gwmi win32_quickfixengineering | Sort-Object InstalledOn | ogv -passthru -Title 'Select an update to be removed'",
-          "Description": "Get the most recent updates"
+          "Title": "Show System Info",
+          "CommandArguments": "-Command \"&{msinfo32.exe}\"",
+          "Description": "Display the system information."
         }
       ]
     }

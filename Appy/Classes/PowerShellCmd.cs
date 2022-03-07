@@ -125,7 +125,7 @@ namespace Appy.Classes
                 Console.WriteLine(Environment.NewLine +
                     $"{outLine.Data}");
 #endif
-            }
+            }            
         }
     }
 }

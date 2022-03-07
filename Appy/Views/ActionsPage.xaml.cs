@@ -140,6 +140,10 @@ namespace Appy.Views
             dataContext.DisableRun();
 
             ProcessCommandOutput(await Task.Run(() => cmd.Run(runCommand)));
+            if (ConsoleOutputRowDefinition.Height.Value == 0)
+            {
+                ShowOutput_Click(sender, e);
+            }
         }
 
         private void Copy_Click(object sender, RoutedEventArgs e)
