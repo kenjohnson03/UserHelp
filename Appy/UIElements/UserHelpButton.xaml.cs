@@ -128,9 +128,10 @@ namespace Appy.UIElements
 
             StackPanel s = new StackPanel()
             {
-                Orientation = Orientation.Vertical
+                Orientation = Orientation.Vertical,
+                VerticalAlignment = VerticalAlignment.Center
             };
-
+            
             s.Children.Add(tb);
             s.Children.Add(desc);
 

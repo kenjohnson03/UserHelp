@@ -10,11 +10,11 @@
     <Grid>
         <DockPanel LastChildFill="True" Background="#33D2D2D2">
             <StackPanel DockPanel.Dock="Left" Width="320" Name="stackyTheStackPanel" Orientation="Vertical" Margin="0,0,0,0" MouseUp="StackyTheStackPanel_MouseUp">
-                <StackPanel Orientation="Horizontal" Name="BackButton" MouseUp="BackButton_MouseUp" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Name="BackButton" MouseUp="BackButton_MouseUp" MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave" Background="Transparent">
 
                     <Path  Fill="Black" Data="M 8 0 L 0 8 L 8 16 L 8 13 L 3 8 L 8 3 Z" Margin="15"/>
 
-                    <TextBlock FontSize="15" VerticalAlignment="Center">Go Back</TextBlock>
+                    <TextBlock FontSize="15" VerticalAlignment="Center" Name="GoBack" >Go Back</TextBlock>
                 </StackPanel>
             </StackPanel>
             <Grid DockPanel.Dock="Top" Background="White" Name="CommandOutputGrid">
@@ -28,17 +28,17 @@
                         <TextBlock Name="Title" Text="Title" HorizontalAlignment="Left" FontSize="18" FontWeight="Normal" TextWrapping="Wrap"></TextBlock>
                         <TextBlock Name="Description" Text="Description goes here" HorizontalAlignment="Left" FontSize="14" FontWeight="Normal" TextWrapping="Wrap" Margin="0,15,0,15" ></TextBlock>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Name="ShowOutput" Content="Show Output" Click="ShowOutput_Click" Height="30" HorizontalAlignment="Right" Margin="10,0,10,0" Padding="10,0"></Button>
-                            <Button Name="Copy" Content="Copy Output" Click="Copy_Click" Height="30" HorizontalAlignment="Right" Margin="10,0,10,0" Padding="10,0"></Button>
-                            <Button Name="Run" Content="Run" Click="Run_ClickAsync" IsEnabled="{Binding RunEnabled}" Height="30" HorizontalAlignment="Right" Margin="10,0,25,0" Padding="10,0"></Button>
-                        </StackPanel>
+                            <Button Name="ShowOutput" Content="Show Output" Click="ShowOutput_Click" HorizontalAlignment="Right" BorderBrush="Transparent"></Button>
+                            <Button Name="Copy" Content="Copy Output" Click="Copy_Click" HorizontalAlignment="Right" Margin="10,0,10,0" BorderBrush="Transparent"></Button>
+                            <Button Name="Run" Content="Run" Click="Run_ClickAsync" IsEnabled="{Binding RunEnabled}" HorizontalAlignment="Right" Margin="0,0,10,0" BorderBrush="Transparent"></Button>
+                    </StackPanel>
                     </StackPanel>
                 
                 <!--<StackPanel Orientation="Horizontal" Margin="50,0,0,0" Grid.Row="1" HorizontalAlignment="Right">
                     <Button Name="Run" Content="Run" Click="Run_Click" Height="30" Width="50" HorizontalAlignment="Right" Margin="25,0,25,0" ></Button>
                 </StackPanel>-->                
                 <GridSplitter Height="5" Grid.Row="1" HorizontalAlignment="Stretch" ResizeDirection="Rows" Name="CommandGridSplitter" />
-                <ScrollViewer Grid.Row="2"  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Grid.Row="2"  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Name="CommandOutputScrollViewer">
                     <!--<StackPanel Background="MidnightBlue" Name="CommandOutput" >
                         
                     </StackPanel>-->

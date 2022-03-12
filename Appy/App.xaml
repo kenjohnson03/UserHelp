@@ -4,6 +4,57 @@
              xmlns:local="clr-namespace:Appy"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Button">
+            <!--<Setter Property="Height" Value="40" />
+            <Setter Property="Margin" Value="12.5,0,12.5,0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Padding" Value="10,0" />-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="True">
+                            
+                            <!-- Inner Rectangle with rounded corners. -->
+                            <Rectangle x:Name="innerRectangle" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Height="{TemplateBinding Height}" VerticalAlignment="Stretch" Stroke="{TemplateBinding Background}" StrokeThickness="2" Fill="{TemplateBinding Background}">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <RotateTransform />
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <!-- Present Content (text) of the button. -->
+                            <DockPanel Name="myContentPresenterDockPanel">
+                                <ContentPresenter x:Name="myContentPresenter" Margin="20,8" Content="{TemplateBinding  Content}" TextBlock.Foreground="Black" TextBlock.FontSize="15" />
+                            </DockPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                             <!--Set properties when mouse pointer is over the button.--> 
+                            <Trigger Property="IsMouseOver" Value="True">
+                                 <!--Below are three property settings that occur when the           condition is met (user mouses over button).  
+                                 Change the color of the outer rectangle when user           mouses over it.--> 
+                                <Setter Property ="Rectangle.Stroke" TargetName="innerRectangle" Value="DarkSlateGray" />
+                                 <!--Sets the glass opacity to 1, therefore, the           glass "appears" when user mouses over it.--> 
+                                
+                            </Trigger>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="innerRectangle" Storyboard.TargetProperty=
+                                                             "(Rectangle.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" From="1" To=".85" Duration="0:0:0.15" AutoReverse="True"/>
+                                            <DoubleAnimation Storyboard.TargetName="innerRectangle" Storyboard.TargetProperty=
+                                                             "(Rectangle.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" From="1" To=".85" Duration="0:0:0.15" AutoReverse="True"/>                                         
+                                        </Storyboard>
+                                        
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

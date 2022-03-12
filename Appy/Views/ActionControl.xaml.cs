@@ -31,7 +31,6 @@ namespace Appy.Views
             set
             {
                 _Text = value;
-                //DataContextChangedUpdate("Text");
             }
         }
         public string Id { get; set; }
@@ -140,23 +139,11 @@ namespace Appy.Views
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
             State = AState.Hover;
-            //Grid p = sender as Grid;
-            //p.Background = new SolidColorBrush(HoverColor);
             DataContextChangedUpdate("ActionBackground");
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
-            //Grid p = sender as Grid;
-            //if(this.Selected == true)
-            //{
-            //    p.Background = new SolidColorBrush(SelectedColor);
-            //}
-            //else
-            //{
-            //    p.Background = Brushes.Transparent;                
-            //}
-
             if (this.Selected == true)
             {
                 State = AState.Selected;

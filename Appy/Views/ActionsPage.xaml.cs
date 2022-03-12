@@ -1,5 +1,6 @@
 ﻿using Appy.Classes;
 using Appy.Data;
+using Appy.UIElements;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -36,7 +38,7 @@ namespace Appy.Views
 
         private ActionPageViewModel dataContext;
 
-        public ActionsPage(ObservableCollection<UserAction> Actions, ref Frame MyNavigator)
+        public ActionsPage(ObservableCollection<UserAction> Actions, ref Frame MyNavigator, ref StringBuilder sb)
         {
             this._MyNavigator = MyNavigator;
             InitializeComponent();
@@ -44,8 +46,8 @@ namespace Appy.Views
             bool first = true;
             bool selected = true;
             runCommand = "";
-            CommandOutputHeight = 250.0;
-            CommandOutputText = new StringBuilder();
+            CommandOutputHeight = 250;
+            CommandOutputText = sb;
 
 
             dataContext = new ActionPageViewModel();
@@ -83,11 +85,14 @@ namespace Appy.Views
                 stackyTheStackPanel.Children.Add(ac);
                 //stackyTheStackPanel.Children.Add(new Rectangle() { Height = 2, HorizontalAlignment = HorizontalAlignment.Stretch, Fill = Brushes.DarkGray });                
             }
+            InitializeCommandOutput();
+
         }
 
 
         private void BackButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            this.DataContext = null;
             _MyNavigator.NavigationService.GoBack();
         }
 
@@ -155,32 +160,77 @@ namespace Appy.Views
         { 
             GridLengthConverter converter = new GridLengthConverter();
             if (ConsoleOutputRowDefinition.Height.Value == 0)
-            {                
-                ConsoleOutputRowDefinition.Height = (GridLength)converter.ConvertFromString(CommandOutputHeight.ToString());
+            {
+                //ConsoleOutputRowDefinition.Height = (GridLength)converter.ConvertFromString(CommandOutputHeight.ToString());
+                ShowCommandOutput();
             }
             else
             {
                 CommandOutputHeight = ConsoleOutputRowDefinition.Height.Value;
-                ConsoleOutputRowDefinition.Height = (GridLength)converter.ConvertFromString("0");
+                //ConsoleOutputRowDefinition.Height = (GridLength)converter.ConvertFromString("0");
+                HideCommandOutput();
             }           
+        }
+
+        private void InitializeCommandOutput()
+        {
+            if (!String.IsNullOrEmpty(CommandOutputText.ToString()))
+            {
+                foreach (string line in CommandOutputText.ToString().Split(
+                    new string[] { Environment.NewLine },
+                    StringSplitOptions.None))
+                {
+                    if (!String.IsNullOrEmpty(line))
+                    {
+                        dataContext.AddLine(line);
+                    }
+                }
+            }
+            CommandOutputScrollViewer.ScrollToBottom();
         }
 
         public void ProcessCommandOutput(string output)
         {
-            if (output != null)
+            if (!String.IsNullOrEmpty(output))
             {
                 foreach(string line in output.Split(
                     new string[] { Environment.NewLine },
                     StringSplitOptions.None))
                 {
                     if(!String.IsNullOrEmpty(line))
-                    {
-                        CommandOutputText.AppendLine(line);
+                    {                        
+                        CommandOutputText.AppendLine(line);                                              
                         dataContext.AddLine(line);
                     }                    
                 }                
             }
+            CommandOutputScrollViewer.ScrollToBottom();
             dataContext.EnableRun();
+        }
+
+
+        private void ShowCommandOutput()
+        {
+            GridLengthConverter converter = new GridLengthConverter();
+
+            ConsoleOutputRowDefinition.Height = (GridLength)converter.ConvertFromString(CommandOutputHeight.ToString());
+              
+        }
+        private void HideCommandOutput()
+        {
+            GridLengthConverter converter = new GridLengthConverter();
+
+            ConsoleOutputRowDefinition.Height = (GridLength)converter.ConvertFromString("0");
+        }
+
+        private void BackButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            BackButton.Background = new SolidColorBrush(hoverColor);
+        }
+
+        private void BackButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            BackButton.Background = Brushes.Transparent;
         }
     }
 }

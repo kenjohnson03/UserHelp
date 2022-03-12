@@ -26,6 +26,7 @@ namespace Appy
     {
         private static StringBuilder sortOutput = null;
         private static int numOutputLines = 0;
+        private StringBuilder ConsoleOutputLines;
         List<Classes.Category> Categories = new List<Classes.Category>();
 
         public MainWindow()
@@ -33,7 +34,7 @@ namespace Appy
 
             InitializeComponent();
             
-
+            ConsoleOutputLines = new StringBuilder();
             string userHelpFilePath = Environment.GetEnvironmentVariable("ProgramData") + "\\UserHelp\\UserHelp.json";
             string WorkingDirectory = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -41,11 +42,15 @@ namespace Appy
 
             if (System.IO.File.Exists(userHelpFilePath))
             {
+#if DEBUG
                 Console.WriteLine("Path exists");
+#endif
             }
             else
             {
+#if DEBUG
                 Console.WriteLine("Path does not exist");
+#endif
                 System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(userHelpFilePath));
                 File.Copy(System.IO.Path.Combine(WorkingDirectory, "UserHelp.json"), userHelpFilePath, true);
             }
@@ -55,7 +60,7 @@ namespace Appy
 #endif
             Categories = Appy.Data.ParseCategoriesJSON.GetData(userHelpFilePath);
 
-            Appy.Views.CategoriesPage categoryPage = new Views.CategoriesPage(ref Categories, ref NavigationFrame);
+            Appy.Views.CategoriesPage categoryPage = new Views.CategoriesPage(ref Categories, ref NavigationFrame, ref ConsoleOutputLines);
             NavigationFrame.Navigate(categoryPage);
         }
 

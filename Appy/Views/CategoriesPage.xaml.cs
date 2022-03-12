@@ -25,18 +25,20 @@ namespace Appy.Views
     {
         private List<Appy.Classes.Category> Categories;
         private Frame _MyNavigator;
+        private StringBuilder _ConsoleOutput;
 
         public CategoriesPage()
         {
             InitializeComponent();
         }
 
-        public CategoriesPage(ref List<Appy.Classes.Category> categories, ref Frame MyNavigator)
+        public CategoriesPage(ref List<Appy.Classes.Category> categories, ref Frame MyNavigator, ref StringBuilder sb)
         {
             InitializeComponent();
             Categories = categories;
             _MyNavigator = MyNavigator;
             SetupMainLayout2();
+            _ConsoleOutput = sb;
 
         }
 
@@ -65,7 +67,7 @@ namespace Appy.Views
         {
             UserHelpButton b = sender as UserHelpButton;
             Appy.Classes.Category g = Categories.Where(x => x.Id == b.Id).FirstOrDefault<Appy.Classes.Category>();
-            _MyNavigator.Navigate(new ActionsPage(g.UserActions, ref _MyNavigator));
+            _MyNavigator.Navigate(new ActionsPage(g.UserActions, ref _MyNavigator, ref _ConsoleOutput));
         }
     }
 }
