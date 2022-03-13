@@ -56,6 +56,7 @@ namespace Appy.Classes
                     // from this application using the Kill method.
                     myProcess.BeginOutputReadLine();
                     myProcess.WaitForExit();
+                    myProcess.Dispose();
                 }
             }
             catch (Exception ex)

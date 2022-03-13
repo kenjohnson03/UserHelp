@@ -25,30 +25,34 @@
                     <RowDefinition Height="0" Name="ConsoleOutputRowDefinition"/>
                 </Grid.RowDefinitions>
                     <StackPanel Orientation="Vertical" Margin="50,25,25,25" Background="White" Name="TopStackPanel" >
-                        <TextBlock Name="Title" Text="Title" HorizontalAlignment="Left" FontSize="18" FontWeight="Normal" TextWrapping="Wrap"></TextBlock>
-                        <TextBlock Name="Description" Text="Description goes here" HorizontalAlignment="Left" FontSize="14" FontWeight="Normal" TextWrapping="Wrap" Margin="0,15,0,15" ></TextBlock>
+                        <TextBlock Name="ActionTitle" Text="Title" HorizontalAlignment="Left" FontSize="18" FontWeight="Normal" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Name="ActionDescription" Text="Description goes here" HorizontalAlignment="Left" FontSize="14" FontWeight="Normal" TextWrapping="Wrap" Margin="0,15,0,15" ></TextBlock>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Name="ShowOutput" Content="Show Output" Click="ShowOutput_Click" HorizontalAlignment="Right" BorderBrush="Transparent"></Button>
                             <Button Name="Copy" Content="Copy Output" Click="Copy_Click" HorizontalAlignment="Right" Margin="10,0,10,0" BorderBrush="Transparent"></Button>
                             <Button Name="Run" Content="Run" Click="Run_ClickAsync" IsEnabled="{Binding RunEnabled}" HorizontalAlignment="Right" Margin="0,0,10,0" BorderBrush="Transparent"></Button>
                     </StackPanel>
-                    </StackPanel>
-                
-                <!--<StackPanel Orientation="Horizontal" Margin="50,0,0,0" Grid.Row="1" HorizontalAlignment="Right">
-                    <Button Name="Run" Content="Run" Click="Run_Click" Height="30" Width="50" HorizontalAlignment="Right" Margin="25,0,25,0" ></Button>
-                </StackPanel>-->                
+                    </StackPanel>               
                 <GridSplitter Height="5" Grid.Row="1" HorizontalAlignment="Stretch" ResizeDirection="Rows" Name="CommandGridSplitter" />
                 <ScrollViewer Grid.Row="2"  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Name="CommandOutputScrollViewer">
+                    <TextBox TextWrapping="Wrap" Text="TextBlock" Name="CommandOutputTextBlock" Background="MidnightBlue" Foreground="White" FontFamily="Consolas" Focusable="True" >
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Copy" Click="Copy_Click" IsCheckable="False" />
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
                     <!--<StackPanel Background="MidnightBlue" Name="CommandOutput" >
                         
                     </StackPanel>-->
-                    <ListView ItemsSource="{Binding CommandOutputLines}" Background="MidnightBlue" >
+                    <!--<ListView ItemsSource="{Binding CommandOutputLines}" Background="MidnightBlue" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}" Foreground="White" FontFamily="Consolas" Margin="0" />
                             </DataTemplate>                            
                         </ListView.ItemTemplate>
-                    </ListView>
+                    </ListView>-->
+                    
                 </ScrollViewer>
                 
 

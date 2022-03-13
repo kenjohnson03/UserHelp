@@ -144,8 +144,7 @@ namespace Appy.UIElements
                 Child = s,
                 CornerRadius = new CornerRadius(12),
                 Id = this.Id,
-                BorderThickness = new Thickness(2)
-
+                BorderThickness = new Thickness(1.5)
             };
 
 
@@ -160,7 +159,7 @@ namespace Appy.UIElements
 
         private void IconBlock_MouseEnter(object sender, MouseEventArgs e)
         {
-            border.BorderBrush = new SolidColorBrush(Color.FromRgb(Convert.ToByte(100), Convert.ToByte(100), Convert.ToByte(100)));            
+            border.BorderBrush = new SolidColorBrush(Colors.LightGray);            
         }
 
         private void IconBlock_MouseDown(object sender, MouseButtonEventArgs e)

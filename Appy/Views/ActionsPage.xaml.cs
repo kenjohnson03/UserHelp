@@ -1,23 +1,14 @@
 ﻿using Appy.Classes;
 using Appy.Data;
-using Appy.UIElements;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Appy.Views
 {
@@ -31,14 +22,13 @@ namespace Appy.Views
         Color selectedColor = Color.FromArgb(Convert.ToByte(.2), Convert.ToByte(210), Convert.ToByte(210), Convert.ToByte(210));
         Color hoverColor = Color.FromArgb(Convert.ToByte(100), Convert.ToByte(190), Convert.ToByte(190), Convert.ToByte(190));
         string runCommand;
-        private string PowerShellTextBlockText;
         private double CommandOutputHeight;
         private StringBuilder CommandOutputText;
-
+        public String Id;
 
         private ActionPageViewModel dataContext;
 
-        public ActionsPage(ObservableCollection<UserAction> Actions, ref Frame MyNavigator, ref StringBuilder sb)
+        public ActionsPage(ObservableCollection<UserAction> Actions, String Id, ref Frame MyNavigator, ref StringBuilder sb)
         {
             this._MyNavigator = MyNavigator;
             InitializeComponent();
@@ -48,6 +38,7 @@ namespace Appy.Views
             runCommand = "";
             CommandOutputHeight = 250;
             CommandOutputText = sb;
+            this.Id = Id;
 
 
             dataContext = new ActionPageViewModel();
@@ -62,18 +53,17 @@ namespace Appy.Views
                 {
                     selected = true;
                     first = false;
-                    Title.Text = item.Title;
-                    Description.Text = item.Description;
+                    ActionTitle.Text = item.Title;
+                    ActionDescription.Text = item.Description;
                     runCommand = item.CommandArguments;
                 }
                 else
                 {
                     selected = false;
                 }
+
                 ActionControl ac = new ActionControl
                 {
-
-                    //ActionControl ac = new ActionControl(item.Title, Brushes.Azure.Color, false, hoverColor, Brushes.White.Color);
                     UpdateTheParent = UpdateActionControls,
                     Text = item.Title,
                     Color = Brushes.Azure.Color,
@@ -83,7 +73,7 @@ namespace Appy.Views
                     Id = item.Id
                 };
                 stackyTheStackPanel.Children.Add(ac);
-                //stackyTheStackPanel.Children.Add(new Rectangle() { Height = 2, HorizontalAlignment = HorizontalAlignment.Stretch, Fill = Brushes.DarkGray });                
+                            
             }
             InitializeCommandOutput();
 
@@ -92,7 +82,6 @@ namespace Appy.Views
 
         private void BackButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            this.DataContext = null;
             _MyNavigator.NavigationService.GoBack();
         }
 
@@ -117,8 +106,8 @@ namespace Appy.Views
                 else
                 {
                     UserAction ua = UserActions.Where(u => u.Id == ac.Id).FirstOrDefault();
-                    Title.Text = ua.Title;
-                    Description.Text = ua.Description;
+                    ActionTitle.Text = ua.Title;
+                    ActionDescription.Text = ua.Description;
                     runCommand = ua.CommandArguments;
                     (stackyTheStackPanel.Children[i] as ActionControl).Selected = true;
                 }
@@ -132,17 +121,14 @@ namespace Appy.Views
             dataContext.DisableRun();
             
             cmd.UpdateCommandComplete += ProcessCommandOutput;
-            cmd.Run(runCommand);
-            
-            this.Run.IsEnabled = true;
-            
+            cmd.Run(runCommand);                       
         }
 
         private async void Run_ClickAsync(object sender, RoutedEventArgs e)
         {
             Classes.PowerShellCmd cmd = new PowerShellCmd();
 
-            dataContext.DisableRun();
+            dataContext.DisableRun();            
 
             ProcessCommandOutput(await Task.Run(() => cmd.Run(runCommand)));
             if (ConsoleOutputRowDefinition.Height.Value == 0)
@@ -161,31 +147,18 @@ namespace Appy.Views
             GridLengthConverter converter = new GridLengthConverter();
             if (ConsoleOutputRowDefinition.Height.Value == 0)
             {
-                //ConsoleOutputRowDefinition.Height = (GridLength)converter.ConvertFromString(CommandOutputHeight.ToString());
                 ShowCommandOutput();
             }
             else
             {
                 CommandOutputHeight = ConsoleOutputRowDefinition.Height.Value;
-                //ConsoleOutputRowDefinition.Height = (GridLength)converter.ConvertFromString("0");
                 HideCommandOutput();
             }           
         }
 
         private void InitializeCommandOutput()
         {
-            if (!String.IsNullOrEmpty(CommandOutputText.ToString()))
-            {
-                foreach (string line in CommandOutputText.ToString().Split(
-                    new string[] { Environment.NewLine },
-                    StringSplitOptions.None))
-                {
-                    if (!String.IsNullOrEmpty(line))
-                    {
-                        dataContext.AddLine(line);
-                    }
-                }
-            }
+            CommandOutputTextBlock.Text = CommandOutputText.ToString();
             CommandOutputScrollViewer.ScrollToBottom();
         }
 
@@ -199,12 +172,13 @@ namespace Appy.Views
                 {
                     if(!String.IsNullOrEmpty(line))
                     {                        
-                        CommandOutputText.AppendLine(line);                                              
-                        dataContext.AddLine(line);
+                        CommandOutputText.AppendLine(line);     
                     }                    
                 }                
             }
+            CommandOutputTextBlock.Text = CommandOutputText.ToString();
             CommandOutputScrollViewer.ScrollToBottom();
+            
             dataContext.EnableRun();
         }
 
@@ -232,5 +206,6 @@ namespace Appy.Views
         {
             BackButton.Background = Brushes.Transparent;
         }
+
     }
 }

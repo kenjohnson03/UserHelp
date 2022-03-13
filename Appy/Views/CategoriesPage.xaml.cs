@@ -1,20 +1,10 @@
 ﻿using Appy.UIElements;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using UserHelp.UIElements;
 
 namespace Appy.Views
 {
@@ -26,6 +16,7 @@ namespace Appy.Views
         private List<Appy.Classes.Category> Categories;
         private Frame _MyNavigator;
         private StringBuilder _ConsoleOutput;
+        private List<ActionsPage> ActionsPages;
 
         public CategoriesPage()
         {
@@ -36,10 +27,10 @@ namespace Appy.Views
         {
             InitializeComponent();
             Categories = categories;
-            _MyNavigator = MyNavigator;
-            SetupMainLayout2();
+            _MyNavigator = MyNavigator;            
             _ConsoleOutput = sb;
-
+            ActionsPages = new List<ActionsPage>();
+            SetupMainLayout2();
         }
 
         private void SetupMainLayout2()
@@ -60,14 +51,17 @@ namespace Appy.Views
                 };
                 b.MouseUp += new MouseButtonEventHandler(this.IconBlock_MouseUp2);
                 p.Children.Add(b);
+
+                // Create each of the ActionsPage
+                ActionsPages.Add(new ActionsPage(group.UserActions, group.Id, ref _MyNavigator, ref _ConsoleOutput));
             }
         }
 
         private void IconBlock_MouseUp2(object sender, MouseButtonEventArgs e)
         {
             UserHelpButton b = sender as UserHelpButton;
-            Appy.Classes.Category g = Categories.Where(x => x.Id == b.Id).FirstOrDefault<Appy.Classes.Category>();
-            _MyNavigator.Navigate(new ActionsPage(g.UserActions, ref _MyNavigator, ref _ConsoleOutput));
+            //Appy.Classes.Category g = Categories.Where(x => x.Id == b.Id).FirstOrDefault<Appy.Classes.Category>();
+            _MyNavigator.Navigate(ActionsPages.Where(p => p.Id == b.Id).FirstOrDefault());
         }
     }
 }

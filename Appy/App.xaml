@@ -38,6 +38,11 @@
                                  <!--Sets the glass opacity to 1, therefore, the           glass "appears" when user mouses over it.--> 
                                 
                             </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Rectangle.Stroke" TargetName="innerRectangle" Value="Transparent" />
+                                <Setter Property="Rectangle.Fill" TargetName="innerRectangle" Value="#e9e9e9" />
+                                <Setter Property="TextBlock.Foreground" TargetName="myContentPresenter" Value="Transparent" />
+                            </Trigger>
                             <EventTrigger RoutedEvent="Button.Click">
                                 <EventTrigger.Actions>
                                     <BeginStoryboard>
