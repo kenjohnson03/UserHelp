@@ -35,13 +35,6 @@ namespace Appy.Views
 
         private void SetupMainLayout2()
         {
-            WrapPanel p = new WrapPanel
-            {
-                Orientation = Orientation.Horizontal,
-                HorizontalAlignment = HorizontalAlignment.Center
-            };
-
-            CategoryGrid.Children.Add(p);
             foreach (var group in Categories)
             {
                 UserHelpButton b = new UserHelpButton(group.Id)

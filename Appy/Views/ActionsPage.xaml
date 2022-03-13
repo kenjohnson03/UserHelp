@@ -9,14 +9,17 @@
 
     <Grid>
         <DockPanel LastChildFill="True" Background="#33D2D2D2">
-            <StackPanel DockPanel.Dock="Left" Width="320" Name="stackyTheStackPanel" Orientation="Vertical" Margin="0,0,0,0" MouseUp="StackyTheStackPanel_MouseUp">
-                <StackPanel Orientation="Horizontal" Name="BackButton" MouseUp="BackButton_MouseUp" MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave" Background="Transparent">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel DockPanel.Dock="Left" Width="320" Name="stackyTheStackPanel" Orientation="Vertical" Margin="0,0,0,0" MouseUp="StackyTheStackPanel_MouseUp" CanVerticallyScroll="True">
+                    <StackPanel Orientation="Horizontal" Name="BackButton" MouseUp="BackButton_MouseUp" MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave" Background="Transparent">
 
-                    <Path  Fill="Black" Data="M 8 0 L 0 8 L 8 16 L 8 13 L 3 8 L 8 3 Z" Margin="15"/>
+                        <Path  Fill="Black" Data="M 8 0 L 0 8 L 8 16 L 8 13 L 3 8 L 8 3 Z" Margin="15"/>
 
-                    <TextBlock FontSize="15" VerticalAlignment="Center" Name="GoBack" >Go Back</TextBlock>
+                        <TextBlock FontSize="15" VerticalAlignment="Center" Name="GoBack" >Go Back</TextBlock>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </ScrollViewer>
+            
             <Grid DockPanel.Dock="Top" Background="White" Name="CommandOutputGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" Name="TopStackPanelRowDefinition"/>

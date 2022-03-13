@@ -7,8 +7,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CategoriesPage">
-
-    <Grid Name="CategoryGrid" Margin="35">
-        
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <WrapPanel Name="p" HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+        </WrapPanel>
+    </ScrollViewer>
 </Page>

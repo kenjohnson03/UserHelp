@@ -18,6 +18,326 @@
           "Title": "Invoke a command",
           "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
           "Description": "Shows all running processes"
+        },
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        },
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        },
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        },
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        },
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        },
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        },
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        }
+      ]
+    },
+    {
+      "Name": "Drivers",
+      "Description": "Driver actions",
+      "UserActions": [
+        {
+          "Title": "Check for bad drivers",
+          "CommandArguments": "-File c:\\ProgramData\\UserHelp\\Drivers.ps1",
+          "Description": "Use Win32_SystemDrivers to look for problems. File is not included."
+        }
+      ]
+    },
+    {
+      "Name": "System Information",
+      "Description": "Show system information",
+      "UserActions": [
+        {
+          "Title": "Show System Info",
+          "CommandArguments": "-Command \"&{msinfo32.exe}\"",
+          "Description": "Display the system information."
+        }
+      ]
+    },
+    {
+      "Name": "Applications",
+      "Description": "Application repair actions",
+      "UserActions": [
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        }
+      ]
+    },
+    {
+      "Name": "Drivers",
+      "Description": "Driver actions",
+      "UserActions": [
+        {
+          "Title": "Check for bad drivers",
+          "CommandArguments": "-File c:\\ProgramData\\UserHelp\\Drivers.ps1",
+          "Description": "Use Win32_SystemDrivers to look for problems. File is not included."
+        }
+      ]
+    },
+    {
+      "Name": "System Information",
+      "Description": "Show system information",
+      "UserActions": [
+        {
+          "Title": "Show System Info",
+          "CommandArguments": "-Command \"&{msinfo32.exe}\"",
+          "Description": "Display the system information."
+        }
+      ]
+    },
+    {
+      "Name": "Applications",
+      "Description": "Application repair actions",
+      "UserActions": [
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        }
+      ]
+    },
+    {
+      "Name": "Drivers",
+      "Description": "Driver actions",
+      "UserActions": [
+        {
+          "Title": "Check for bad drivers",
+          "CommandArguments": "-File c:\\ProgramData\\UserHelp\\Drivers.ps1",
+          "Description": "Use Win32_SystemDrivers to look for problems. File is not included."
+        }
+      ]
+    },
+    {
+      "Name": "System Information",
+      "Description": "Show system information",
+      "UserActions": [
+        {
+          "Title": "Show System Info",
+          "CommandArguments": "-Command \"&{msinfo32.exe}\"",
+          "Description": "Display the system information."
+        }
+      ]
+    },
+    {
+      "Name": "Applications",
+      "Description": "Application repair actions",
+      "UserActions": [
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        }
+      ]
+    },
+    {
+      "Name": "Drivers",
+      "Description": "Driver actions",
+      "UserActions": [
+        {
+          "Title": "Check for bad drivers",
+          "CommandArguments": "-File c:\\ProgramData\\UserHelp\\Drivers.ps1",
+          "Description": "Use Win32_SystemDrivers to look for problems. File is not included."
+        }
+      ]
+    },
+    {
+      "Name": "System Information",
+      "Description": "Show system information",
+      "UserActions": [
+        {
+          "Title": "Show System Info",
+          "CommandArguments": "-Command \"&{msinfo32.exe}\"",
+          "Description": "Display the system information."
+        }
+      ]
+    },
+    {
+      "Name": "Applications",
+      "Description": "Application repair actions",
+      "UserActions": [
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
+        }
+      ]
+    },
+    {
+      "Name": "Drivers",
+      "Description": "Driver actions",
+      "UserActions": [
+        {
+          "Title": "Check for bad drivers",
+          "CommandArguments": "-File c:\\ProgramData\\UserHelp\\Drivers.ps1",
+          "Description": "Use Win32_SystemDrivers to look for problems. File is not included."
+        }
+      ]
+    },
+    {
+      "Name": "System Information",
+      "Description": "Show system information",
+      "UserActions": [
+        {
+          "Title": "Show System Info",
+          "CommandArguments": "-Command \"&{msinfo32.exe}\"",
+          "Description": "Display the system information."
+        }
+      ]
+    },
+    {
+      "Name": "Applications",
+      "Description": "Application repair actions",
+      "UserActions": [
+        {
+          "Title": "Run a file",
+          "CommandArguments": "-File C:\\ProgramData\\UserHelp\\Testing.ps1",
+          "Description": "Run a script from the root folder"
+        },
+        {
+          "Title": "Run a command",
+          "CommandArguments": "-Command \"&{ get-process |? { $_.name -like 'p*'} | ogv -passthru -Title 'Pick your process'}\"",
+          "Description": "Simple command that outputs all of the processes that start with P"
+        },
+        {
+          "Title": "Invoke a command",
+          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Description": "Shows all running processes"
         }
       ]
     },

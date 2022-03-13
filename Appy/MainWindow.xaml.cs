@@ -27,6 +27,7 @@ namespace Appy
             string userHelpFilePath = Environment.GetEnvironmentVariable("ProgramData") + "\\UserHelp\\UserHelp.json";
             string WorkingDirectory = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
+
             Console.WriteLine(userHelpFilePath);
 
             if (System.IO.File.Exists(userHelpFilePath))
