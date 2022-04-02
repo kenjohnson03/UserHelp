@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="User Help" Height="550" Width="800">
     <Grid x:Name="MainGrid">
-        <Frame Grid.Row="1" Name="NavigationFrame" NavigationUIVisibility="Hidden"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="17"/>
+        </Grid.RowDefinitions>
+        <Frame Grid.Row="0" Name="NavigationFrame" NavigationUIVisibility="Hidden"/>
+        <StatusBar Grid.Row="1" HorizontalAlignment="Right" Background="Transparent">
+            <TextBlock Margin="0" Padding="0" HorizontalAlignment="Right" Text="Made in the USA" FontSize="9" ToolTip="God Bless America!" Background="Transparent"/>
+        </StatusBar>
+
     </Grid>
 </Window>

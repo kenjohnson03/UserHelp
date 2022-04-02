@@ -1,8 +1,8 @@
 {
   "Categories": [
     {
-      "Name": "Applications",
-      "Description": "Application repair actions",
+      "Name": "Applications are really fun",
+      "Description": "Application repair actions that users can run for fun",
       "UserActions": [
         {
           "Title": "Run a file",

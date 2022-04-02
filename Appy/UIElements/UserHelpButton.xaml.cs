@@ -144,7 +144,8 @@ namespace Appy.UIElements
                 Child = s,
                 CornerRadius = new CornerRadius(12),
                 Id = this.Id,
-                BorderThickness = new Thickness(1.5)
+                BorderThickness = new Thickness(1.5),
+                Padding = new Thickness(5)
             };
 
 
