@@ -8,6 +8,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Name="ActionGrid" MouseUp="StackPanel_MouseUp" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave" Background="{Binding ActionBackground}" >
         <Rectangle x:Name="IndicatorBlock" Fill="Blue" Width="10" MinHeight="20" HorizontalAlignment="Left" Opacity="{Binding SelectedOpacity}"/>
-        <TextBlock Text="{Binding Text}" FontSize="15" Padding="25,15" HorizontalAlignment="Left" TextWrapping="NoWrap"/>
+        <TextBlock Text="{Binding Text}" FontSize="15" Padding="25,15" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow"/>
     </Grid>
 </UserControl>
