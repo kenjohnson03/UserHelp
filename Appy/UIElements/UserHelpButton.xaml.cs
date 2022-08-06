@@ -56,11 +56,11 @@ namespace Appy.UIElements
             }
         }
 
-        public int IconWidth { get; set; }
-        public int IconWidthShrink { get; set; }
+        public double IconWidth { get; set; }
+        public double IconWidthShrink { get; set; }
 
-        public int IconHeight { get; set; }
-        public int IconHeightShrink { get; set; }
+        public double IconHeight { get; set; }
+        public double IconHeightShrink { get; set; }
 
         public Thickness IconMargin { get; set; }
         public Thickness IconMarginShrink { get; set; }
@@ -79,6 +79,7 @@ namespace Appy.UIElements
         private TextBlock tb;
         private TextBlock desc;
         private GroupBorder border;
+        private StackPanel s;
 
 
         public UserHelpButton(string Id,
@@ -92,7 +93,7 @@ namespace Appy.UIElements
         {
             InitializeComponent();
             this.Id = Id;
-            this.IconMargin = new Thickness(15);
+            this.IconMargin = new Thickness(10);
             this.IconMarginShrink = new Thickness(20);
             this.IconWidth = IconWidth;
             this.IconWidthShrink = IconWidthShrink;
@@ -101,6 +102,7 @@ namespace Appy.UIElements
             this.IconTitleFontSize = IconTitleFontSize;
             this.IconTitleFontSizeShrink = IconTitleFontSizeShrink;
             this.IconDescriptionFontSize = IconDescriptionFontSize;
+
             BuildUI();
         }
 
@@ -126,7 +128,7 @@ namespace Appy.UIElements
                 FontWeight = FontWeights.Normal
             };
 
-            StackPanel s = new StackPanel()
+            s = new StackPanel()
             {
                 Orientation = Orientation.Vertical,
                 VerticalAlignment = VerticalAlignment.Center
@@ -145,8 +147,11 @@ namespace Appy.UIElements
                 CornerRadius = new CornerRadius(12),
                 Id = this.Id,
                 BorderThickness = new Thickness(1.5),
-                Padding = new Thickness(5)
+                Padding = new Thickness(5),
+                MinHeight = this.IconHeightShrink,
+                MinWidth = this.IconWidthShrink
             };
+            s.SizeChanged += S_SizeChanged;
 
 
             border.MouseDown += new MouseButtonEventHandler(this.IconBlock_MouseDown);
@@ -158,9 +163,15 @@ namespace Appy.UIElements
             grid.Children.Add(border);
         }
 
-        public void UpdateUI()
+        private void S_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            border.Height = tb.ActualHeight + desc.ActualHeight;
+            double h = s.ActualHeight;
+            if (border.Height < s.ActualHeight)
+            {
+                border.Height = s.ActualHeight;
+                this.IconHeight = s.ActualHeight;
+                this.IconHeightShrink = s.ActualHeight * .9;
+            }
         }
 
         private void IconBlock_MouseEnter(object sender, MouseEventArgs e)

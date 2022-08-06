@@ -9,7 +9,7 @@
 
     <Grid>
         <DockPanel LastChildFill="True" Background="#33D2D2D2">
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel DockPanel.Dock="Left" Width="320" Name="stackyTheStackPanel" Orientation="Vertical" Margin="0,0,0,0" MouseUp="StackyTheStackPanel_MouseUp" CanVerticallyScroll="True">
                     <StackPanel Orientation="Horizontal" Name="BackButton" MouseUp="BackButton_MouseUp" MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave" Background="Transparent">
 
@@ -23,19 +23,30 @@
             <Grid DockPanel.Dock="Top" Background="White" Name="CommandOutputGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" Name="TopStackPanelRowDefinition"/>
-                    <!--<RowDefinition Height="50" />-->
                     <RowDefinition Height="5" />
                     <RowDefinition Height="0" Name="ConsoleOutputRowDefinition"/>
                 </Grid.RowDefinitions>
-                    <StackPanel Orientation="Vertical" Margin="50,25,25,25" Background="White" Name="TopStackPanel" >
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" Margin="50,25,25,25" Background="White" Name="TopStackPanel">
                         <TextBlock Name="ActionTitle" Text="Title" HorizontalAlignment="Left" FontSize="18" FontWeight="Normal" TextWrapping="Wrap"></TextBlock>
-                        <TextBlock Name="ActionDescription" Text="Description goes here" HorizontalAlignment="Left" FontSize="14" FontWeight="Normal" TextWrapping="Wrap" Margin="0,15,0,15" ></TextBlock>
+                        <TextBlock Name="ActionDescription" Text="Description goes here" HorizontalAlignment="Left" FontSize="14" FontWeight="Normal" TextWrapping="Wrap" Margin="0,15,0,15"></TextBlock>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Name="ShowOutput" Content="Show Output" Click="ShowOutput_Click" HorizontalAlignment="Right" BorderBrush="Transparent"></Button>
                             <Button Name="Copy" Content="Copy Output" Click="Copy_Click" HorizontalAlignment="Right" Margin="10,0,10,0" BorderBrush="Transparent"></Button>
                             <Button Name="Run" Content="Run" Click="Run_ClickAsync" IsEnabled="{Binding RunEnabled}" HorizontalAlignment="Right" Margin="0,0,10,0" BorderBrush="Transparent"></Button>
+                        </StackPanel>
                     </StackPanel>
-                    </StackPanel>               
+                </ScrollViewer>
+                <!--<StackPanel Orientation="Vertical" Margin="50,25,25,25" Background="White" Name="TopStackPanel">
+                    <TextBlock Name="ActionTitle" Text="Title" HorizontalAlignment="Left" FontSize="18" FontWeight="Normal" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock Name="ActionDescription" Text="Description goes here" HorizontalAlignment="Left" FontSize="14" FontWeight="Normal" TextWrapping="Wrap" Margin="0,15,0,15" ></TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="ShowOutput" Content="Show Output" Click="ShowOutput_Click" HorizontalAlignment="Right" BorderBrush="Transparent"></Button>
+                        <Button Name="Copy" Content="Copy Output" Click="Copy_Click" HorizontalAlignment="Right" Margin="10,0,10,0" BorderBrush="Transparent"></Button>
+                        <Button Name="Run" Content="Run" Click="Run_ClickAsync" IsEnabled="{Binding RunEnabled}" HorizontalAlignment="Right" Margin="0,0,10,0" BorderBrush="Transparent"></Button>
+                    </StackPanel>
+                </StackPanel>-->
+
                 <GridSplitter Height="5" Grid.Row="1" HorizontalAlignment="Stretch" ResizeDirection="Rows" Name="CommandGridSplitter" />
                 <ScrollViewer Grid.Row="2"  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Name="CommandOutputScrollViewer">
                     <TextBox TextWrapping="Wrap" Text="TextBlock" Name="CommandOutputTextBlock" Background="MidnightBlue" Foreground="White" FontFamily="Consolas" Focusable="True" >

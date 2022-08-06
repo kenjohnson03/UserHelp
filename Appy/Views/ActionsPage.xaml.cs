@@ -76,9 +76,16 @@ namespace Appy.Views
                             
             }
             InitializeCommandOutput();
-
+            this.SizeChanged += ActionsPage_SizeChanged;
         }
 
+        private void ActionsPage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double width = CommandOutputGrid.ActualWidth;
+            ActionTitle.Width = width * .7;
+            ActionDescription.Width = width * .7;
+
+        }
 
         private void BackButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
