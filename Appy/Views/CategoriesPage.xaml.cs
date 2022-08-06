@@ -42,9 +42,9 @@ namespace Appy.Views
                     Text = group.Name,
                     Description = group.Description
                 };
+                
                 b.MouseUp += new MouseButtonEventHandler(this.IconBlock_MouseUp2);
                 p.Children.Add(b);
-
                 // Create each of the ActionsPage
                 ActionsPages.Add(new ActionsPage(group.UserActions, group.Id, ref _MyNavigator, ref _ConsoleOutput));
             }
@@ -53,7 +53,6 @@ namespace Appy.Views
         private void IconBlock_MouseUp2(object sender, MouseButtonEventArgs e)
         {
             UserHelpButton b = sender as UserHelpButton;
-            //Appy.Classes.Category g = Categories.Where(x => x.Id == b.Id).FirstOrDefault<Appy.Classes.Category>();
             _MyNavigator.Navigate(ActionsPages.Where(p => p.Id == b.Id).FirstOrDefault());
         }
     }

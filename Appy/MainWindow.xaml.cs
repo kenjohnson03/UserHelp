@@ -67,10 +67,10 @@ namespace Appy
                 // Add the text to the collected output.
                 sortOutput.Append(Environment.NewLine +
                     $"[{numOutputLines}] - {outLine.Data}");
-
+#if DEBUG
                 Console.WriteLine(Environment.NewLine +
                     $"[{numOutputLines}] - {outLine.Data}");
-
+#endif
 
             }
 

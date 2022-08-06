@@ -114,7 +114,7 @@ namespace Appy.UIElements
                 Margin = new Thickness(5),
                 TextWrapping = TextWrapping.Wrap,
                 FontSize = this.IconTitleFontSize,
-                FontWeight = FontWeights.Bold,
+                FontWeight = FontWeights.Bold     
             };
             desc = new TextBlock()
             {
@@ -156,6 +156,11 @@ namespace Appy.UIElements
 
 
             grid.Children.Add(border);
+        }
+
+        public void UpdateUI()
+        {
+            border.Height = tb.ActualHeight + desc.ActualHeight;
         }
 
         private void IconBlock_MouseEnter(object sender, MouseEventArgs e)

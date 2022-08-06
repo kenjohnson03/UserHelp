@@ -52,7 +52,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CodeLogo%281%29.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -186,9 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="CodeLogo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="CodeLogo%281%29.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

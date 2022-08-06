@@ -28,47 +28,6 @@ namespace Appy.Classes
             numOutputLines = 0;
         }
 
-        public string RunCommand(string command)
-        {
-            try
-            {
-                using (Process myProcess = new Process())
-                {                    
-                    myProcess.StartInfo.UseShellExecute = false;
-                    // You can start any process, HelloWorld is a do-nothing example.
-                    myProcess.StartInfo.FileName = @"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe";
-                    myProcess.StartInfo.Arguments = "-Command \"& { " + command + " }\"";
-                    myProcess.StartInfo.CreateNoWindow = true;
-                    myProcess.StartInfo.RedirectStandardOutput = true;
-
-                    // Set our event handler to asynchronously read the sort output.
-                    myProcess.OutputDataReceived += PowerShellOutputHandler;
-
-                    // Redirect standard input as well.  This stream
-                    // is used synchronously.
-                    myProcess.StartInfo.RedirectStandardInput = true;
-
-
-                    myProcess.Start();
-                    // This code assumes the process you are starting will terminate itself.
-                    // Given that it is started without a window so you cannot terminate it
-                    // on the desktop, it must terminate itself or you can do it programmatically
-                    // from this application using the Kill method.
-                    myProcess.BeginOutputReadLine();
-                    myProcess.WaitForExit();
-                    myProcess.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                Console.WriteLine("EXE: " + ex.Message);
-#endif
-                outputString.AppendLine(ex.Message);
-            }
-            return outputString.ToString();
-        }
-
         public string Run(string Arguments)
         {
             try
