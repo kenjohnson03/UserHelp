@@ -9,4 +9,4 @@ The default location for the UserHelp JSON file is under %PROGRAMDATA%\UserHelp\
 In addition to standard commands users may need to use to resolve standard issues, this tool is intended to be used alongside PowerShell JEA to give users an easy way to resolve issues that previously required escalation. The JEA configuration should also be stored in a read only location that standard users cannot modify.
 
 If this was helpful and you would like to contribute please use this link:
-[Donate](https://www.paypal.com/paypalme/jahobeecoding)
+[Donate](https://www.paypal.com/donate/?hosted_button_id=BD5FRKX6JMFVC)
