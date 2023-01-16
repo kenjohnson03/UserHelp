@@ -26,6 +26,7 @@ namespace Appy.Views
         private double CommandOutputHeight;
         private StringBuilder CommandOutputText;
         public String Id;
+        private bool navigate = true;
 
         private ActionPageViewModel dataContext;
 
@@ -90,7 +91,10 @@ namespace Appy.Views
 
         private void BackButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            _MyNavigator.NavigationService.GoBack();
+            if(navigate)
+            {
+                _MyNavigator.NavigationService.GoBack();
+            }            
         }
 
         private void StackyTheStackPanel_MouseUp(object sender, MouseButtonEventArgs e)
@@ -137,6 +141,8 @@ namespace Appy.Views
             Classes.PowerShellCmd cmd = new PowerShellCmd();
 
             dataContext.DisableRun();
+            navigate = false;
+            
             
             await Task.Run(() => cmd.Run(runCommand, CommandOutputTextBlock, this.Dispatcher));
             if (ConsoleOutputRowDefinition.Height.Value == 0)
@@ -145,6 +151,7 @@ namespace Appy.Views
             }
 
             dataContext.EnableRun();
+            navigate = true;
         }
 
         private void Copy_Click(object sender, RoutedEventArgs e)
