@@ -2,6 +2,7 @@
 using Appy.Data;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,6 @@ namespace Appy.Views
             CommandOutputText = sb;
             this.Id = Id;
 
-
             dataContext = new ActionPageViewModel();
             dataContext.EnableRun();
 
@@ -78,6 +78,7 @@ namespace Appy.Views
             InitializeCommandOutput();
             this.SizeChanged += ActionsPage_SizeChanged;
         }
+
 
         private void ActionsPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -121,7 +122,7 @@ namespace Appy.Views
             }
         }
 
-        private void Run_Click(object sender, RoutedEventArgs e)
+        /*private void Run_Click(object sender, RoutedEventArgs e)
         {
             Classes.PowerShellCmd cmd = new PowerShellCmd();
 
@@ -129,19 +130,21 @@ namespace Appy.Views
             
             cmd.UpdateCommandComplete += ProcessCommandOutput;
             cmd.Run(runCommand);                       
-        }
+        }*/
 
         private async void Run_ClickAsync(object sender, RoutedEventArgs e)
         {
             Classes.PowerShellCmd cmd = new PowerShellCmd();
 
-            dataContext.DisableRun();            
-
-            ProcessCommandOutput(await Task.Run(() => cmd.Run(runCommand)));
+            dataContext.DisableRun();
+            
+            await Task.Run(() => cmd.Run(runCommand, CommandOutputTextBlock, this.Dispatcher));
             if (ConsoleOutputRowDefinition.Height.Value == 0)
             {
                 ShowOutput_Click(sender, e);
             }
+
+            dataContext.EnableRun();
         }
 
         private void Copy_Click(object sender, RoutedEventArgs e)

@@ -15,8 +15,8 @@
           "Description": "Simple command that outputs all of the processes that start with P"
         },
         {
-          "Title": "Invoke a command",
-          "CommandArguments": "-Command \"&{ Invoke-Command { Get-Process }}\"",
+          "Title": "Long running command",
+          "CommandArguments": "-Command \"&{ foreach($a in 1..10){ write-output $a; start-sleep 1;}}\"",
           "Description": "Shows all running processes"
         },
         {

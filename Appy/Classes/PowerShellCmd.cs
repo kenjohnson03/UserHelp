@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace Appy.Classes
 {
@@ -13,6 +14,8 @@ namespace Appy.Classes
         private int numOutputLines;
         public delegate void CommandComplete(string output);
         public CommandComplete UpdateCommandComplete;
+        private System.Windows.Controls.TextBox _cmdOutput;
+        private Dispatcher _dispatcher;
 
         public string Output
         {
@@ -28,8 +31,11 @@ namespace Appy.Classes
             numOutputLines = 0;
         }
 
-        public string Run(string Arguments)
+        public string Run(string Arguments, System.Windows.Controls.TextBox cmdOutput, Dispatcher dispatcher)
         {
+            _cmdOutput = cmdOutput;
+            _dispatcher = dispatcher;
+
             try
             {
                 using (Process myProcess = new Process())
@@ -57,15 +63,13 @@ namespace Appy.Classes
             }
             catch (Exception ex)
             {
+                DispatcherOperation op = _dispatcher.BeginInvoke((Action)(() => {
+                    _cmdOutput.Text += $"{ex.Message}" + Environment.NewLine;
+                }));
 #if DEBUG
                 Console.WriteLine("EXE: " + ex.Message);
 #endif
                 outputString.AppendLine(ex.Message);
-            }
-            if(UpdateCommandComplete != null)
-            {
-                UpdateCommandComplete(outputString.ToString());
-
             }
             return outputString.ToString();
         }
@@ -76,14 +80,12 @@ namespace Appy.Classes
             // Collect the sort command output.
             if (!String.IsNullOrEmpty(outLine.Data))
             {
-                numOutputLines++;
-
-                // Add the text to the collected output.
-                outputString.Append(Environment.NewLine +
-                    $"{outLine.Data}");
+                outputString.AppendLine($"{outLine.Data}");
+                DispatcherOperation op = _dispatcher.BeginInvoke((Action)(() => {
+                    _cmdOutput.Text += $"{outLine.Data}" + Environment.NewLine;
+                }));
 #if DEBUG
-                Console.WriteLine(Environment.NewLine +
-                    $"{outLine.Data}");
+                Console.WriteLine($"{outLine.Data}");
 #endif
             }            
         }
