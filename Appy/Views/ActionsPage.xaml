@@ -48,7 +48,7 @@
                 </StackPanel>-->
 
                 <GridSplitter Height="5" Grid.Row="1" HorizontalAlignment="Stretch" ResizeDirection="Rows" Name="CommandGridSplitter" />
-                <ScrollViewer Grid.Row="2"  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Name="CommandOutputScrollViewer">
+                <ScrollViewer Grid.Row="2"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Name="CommandOutputScrollViewer">
                     <TextBox TextWrapping="Wrap" Text="TextBlock" Name="CommandOutputTextBlock" Background="MidnightBlue" Foreground="White" FontFamily="Consolas" Focusable="True" >
                         <TextBox.ContextMenu>
                             <ContextMenu>
