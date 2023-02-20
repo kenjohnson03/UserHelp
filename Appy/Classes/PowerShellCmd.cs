@@ -11,7 +11,6 @@ namespace Appy.Classes
     public class PowerShellCmd
     {
         private StringBuilder outputString;
-        private int numOutputLines;
         public delegate void CommandComplete(string output);
         public CommandComplete UpdateCommandComplete;
         private System.Windows.Controls.TextBox _cmdOutput;
@@ -28,13 +27,13 @@ namespace Appy.Classes
         public PowerShellCmd()
         {
             outputString = new StringBuilder();
-            numOutputLines = 0;
         }
 
         public string Run(string Arguments, System.Windows.Controls.TextBox cmdOutput, Dispatcher dispatcher)
         {
             _cmdOutput = cmdOutput;
             _dispatcher = dispatcher;
+            string title = System.Diagnostics.Process.GetCurrentProcess().MainWindowTitle;
 
             try
             {
@@ -53,13 +52,12 @@ namespace Appy.Classes
 
 
                     myProcess.Start();
-                    // This code assumes the process you are starting will terminate itself.
-                    // Given that it is started without a window so you cannot terminate it
-                    // on the desktop, it must terminate itself or you can do it programmatically
-                    // from this application using the Kill method.
                     myProcess.BeginOutputReadLine();
                     myProcess.WaitForExit();
                 }
+
+                // write to the application log
+                EventLog.WriteEntry("Application", $"{title}:\nPowerShell command run.\n{Arguments}", EventLogEntryType.Information, 1001);
             }
             catch (Exception ex)
             {
@@ -70,6 +68,9 @@ namespace Appy.Classes
                 Console.WriteLine("EXE: " + ex.Message);
 #endif
                 outputString.AppendLine(ex.Message);
+                // Get the main window title
+                
+                EventLog.WriteEntry("Application", $"{title}:\nPowerShell command run.\n\npowershell.exe {Arguments}\n\nError:\n{ex.Message}\n{ex.InnerException}", EventLogEntryType.Error,1002);
             }
             return outputString.ToString();
         }

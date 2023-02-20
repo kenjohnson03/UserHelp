@@ -47,6 +47,69 @@ namespace Appy.Views
 
             this.DataContext = dataContext;
 
+            TextBox search = new TextBox();
+            search.Name = "Search";
+            search.Height = 30;
+            search.Text = "Search";
+            // add placeholder text to Textbox
+            search.GotFocus += (sender, e) =>
+            {
+                if (search.Text == "Search")
+                {
+                    search.Text = "";
+                    search.Foreground = Brushes.Black;
+                }
+            };
+            search.LostFocus += (sender, e) =>
+            {
+                if (search.Text == "")
+                {
+                    search.Text = "Search";
+                    search.Foreground = Brushes.Gray;
+                }
+            };
+            // add search functionality
+            search.TextChanged += (sender, e) =>
+            {
+                if (search.Text != "Search")
+                {
+                    for (int i = 1; i < stackyTheStackPanel.Children.Count; i++)
+                    {
+                        if (stackyTheStackPanel.Children[i].GetType() == typeof(ActionControl))
+                        {
+                            ActionControl ac2 = (ActionControl)stackyTheStackPanel.Children[i];
+                            if (ac2.Text.ToLower().Contains(search.Text.ToLower()))
+                            {
+                                ac2.Visibility = Visibility.Visible;
+                            }
+                            else
+                            {
+                                ac2.Visibility = Visibility.Collapsed;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 1; i < stackyTheStackPanel.Children.Count; i++)
+                    {
+                        if (stackyTheStackPanel.Children[i].GetType() == typeof(ActionControl))
+                        {
+                            ActionControl ac2 = (ActionControl)stackyTheStackPanel.Children[i];
+                            ac2.Visibility = Visibility.Visible;
+                        }
+                    }
+                }
+            };
+            // Center text in the search box
+            search.VerticalContentAlignment = VerticalAlignment.Center;
+            // set the search box text size to 14px
+            search.FontSize = 14;
+            // set search box margin 3px
+            search.Margin = new Thickness(5,0,5,8);
+            search.Padding = new Thickness(8, 0, 0, 0);
+
+            stackyTheStackPanel.Children.Add(search);
 
             foreach (UserAction item in UserActions)
             {
@@ -111,30 +174,23 @@ namespace Appy.Views
 #endif
             for (int i = 1; i < stackyTheStackPanel.Children.Count; i++)
             {
-                if ((stackyTheStackPanel.Children[i] as ActionControl).Id != ac.Id)
+                if (stackyTheStackPanel.Children[i].GetType() == typeof(ActionControl))
                 {
-                    (stackyTheStackPanel.Children[i] as ActionControl).Selected = false;
-                }
-                else
-                {
-                    UserAction ua = UserActions.Where(u => u.Id == ac.Id).FirstOrDefault();
-                    ActionTitle.Text = ua.Title;
-                    ActionDescription.Text = ua.Description;
-                    runCommand = ua.CommandArguments;
-                    (stackyTheStackPanel.Children[i] as ActionControl).Selected = true;
+                    ActionControl ac2 = (ActionControl)stackyTheStackPanel.Children[i];
+                    if (ac2.Id == ac.Id)
+                    {
+                        ac2.Selected = true;
+                        ActionTitle.Text = ac2.Text;
+                        ActionDescription.Text = UserActions.Where(x => x.Id == ac2.Id).FirstOrDefault().Description;
+                        runCommand = UserActions.Where(x => x.Id == ac2.Id).FirstOrDefault().CommandArguments;
+                    }
+                    else
+                    {
+                        ac2.Selected = false;
+                    }
                 }
             }
         }
-
-        /*private void Run_Click(object sender, RoutedEventArgs e)
-        {
-            Classes.PowerShellCmd cmd = new PowerShellCmd();
-
-            dataContext.DisableRun();
-            
-            cmd.UpdateCommandComplete += ProcessCommandOutput;
-            cmd.Run(runCommand);                       
-        }*/
 
         private async void Run_ClickAsync(object sender, RoutedEventArgs e)
         {
