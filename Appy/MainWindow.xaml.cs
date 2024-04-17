@@ -22,41 +22,28 @@ namespace Appy
         {
 
             InitializeComponent();
-            
+
             ConsoleOutputLines = new StringBuilder();
             string userHelpFilePath = Environment.GetEnvironmentVariable("ProgramData") + "\\UserHelp\\UserHelp.json";
-            string WorkingDirectory = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
+            //This variable isn't needed. File copy functionality has been removed.
+            //string WorkingDirectory = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); 
 
             Console.WriteLine(userHelpFilePath);
 
-            if (System.IO.File.Exists(userHelpFilePath))
+            if (!System.IO.File.Exists(userHelpFilePath))
             {
-#if DEBUG
-                Console.WriteLine("Path exists");
-#endif
+                Console.WriteLine("UserHelp.json not found. A Xaml Window notating that will go here.");
             }
             else
             {
-#if DEBUG
-                Console.WriteLine("Path does not exist");
-#endif
-                System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(userHelpFilePath));
-                File.Copy(System.IO.Path.Combine(WorkingDirectory, "UserHelp.json"), userHelpFilePath, true);
+                Categories = Appy.Data.ParseCategoriesJSON.GetData(userHelpFilePath);
+                string title = this.Title;
+                EventLog.WriteEntry("Application", $"{title}:\nOpened {userHelpFilePath}", EventLogEntryType.Information, 1000);
+                Appy.Views.CategoriesPage categoryPage = new Views.CategoriesPage(ref Categories, ref NavigationFrame, ref ConsoleOutputLines);
+                NavigationFrame.Navigate(categoryPage);
             }
-#if DEBUG
-            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(userHelpFilePath));
-            File.Copy(System.IO.Path.Combine(WorkingDirectory, "UserHelp.json"), userHelpFilePath, true);
-#endif
-            Categories = Appy.Data.ParseCategoriesJSON.GetData(userHelpFilePath);
-            
-            string title = this.Title;            
-            EventLog.WriteEntry("Application", $"{title}:\nOpened {userHelpFilePath}", EventLogEntryType.Information, 1000);
-            Appy.Views.CategoriesPage categoryPage = new Views.CategoriesPage(ref Categories, ref NavigationFrame, ref ConsoleOutputLines);
-            NavigationFrame.Navigate(categoryPage);
         }
-
-        
 
         private void PowerShellOutputHandler(object sendingProcess,
             DataReceivedEventArgs outLine)
@@ -75,7 +62,6 @@ namespace Appy
 #endif
 
             }
-
-        }        
+        }
     }
 }
