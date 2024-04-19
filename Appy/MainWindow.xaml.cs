@@ -26,34 +26,27 @@ namespace Appy
             ConsoleOutputLines = new StringBuilder();
             string userHelpFilePath = Environment.GetEnvironmentVariable("ProgramData") + "\\UserHelp\\UserHelp.json";
             string WorkingDirectory = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-
-            Console.WriteLine(userHelpFilePath);
-
             if (System.IO.File.Exists(userHelpFilePath))
             {
 #if DEBUG
                 Console.WriteLine("Path exists");
 #endif
+                Categories = Appy.Data.ParseCategoriesJSON.GetData(userHelpFilePath);
+
+                string title = this.Title;
+                EventLog.WriteEntry("Application", $"{title}:\nOpened {userHelpFilePath}", EventLogEntryType.Information, 1000);
+                Appy.Views.CategoriesPage categoryPage = new Views.CategoriesPage(ref Categories, ref NavigationFrame, ref ConsoleOutputLines);
+                NavigationFrame.Navigate(categoryPage);
             }
             else
             {
 #if DEBUG
                 Console.WriteLine("Path does not exist");
 #endif
-                System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(userHelpFilePath));
-                File.Copy(System.IO.Path.Combine(WorkingDirectory, "UserHelp.json"), userHelpFilePath, true);
+                Appy.Views.ErrorPage errorPage = new Views.ErrorPage($"UserHelp.json was not found at {userHelpFilePath}");
+                NavigationFrame.Navigate(errorPage);
             }
-#if DEBUG
-            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(userHelpFilePath));
-            File.Copy(System.IO.Path.Combine(WorkingDirectory, "UserHelp.json"), userHelpFilePath, true);
-#endif
-            Categories = Appy.Data.ParseCategoriesJSON.GetData(userHelpFilePath);
             
-            string title = this.Title;            
-            EventLog.WriteEntry("Application", $"{title}:\nOpened {userHelpFilePath}", EventLogEntryType.Information, 1000);
-            Appy.Views.CategoriesPage categoryPage = new Views.CategoriesPage(ref Categories, ref NavigationFrame, ref ConsoleOutputLines);
-            NavigationFrame.Navigate(categoryPage);
         }
 
         
