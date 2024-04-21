@@ -43,8 +43,10 @@ namespace Appy
 #if DEBUG
                 Console.WriteLine("Path does not exist");
 #endif
-                Appy.Views.ErrorPage errorPage = new Views.ErrorPage($"UserHelp.json was not found at {userHelpFilePath}");
+                string message = $"UserHelp.json was not found at {userHelpFilePath}";
+                Appy.Views.ErrorPage errorPage = new Views.ErrorPage(message);
                 NavigationFrame.Navigate(errorPage);
+                EventLog.WriteEntry("Application", message, EventLogEntryType.Error, 5000);
             }
             
         }
